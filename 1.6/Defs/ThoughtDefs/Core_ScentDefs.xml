@@ -95,6 +95,32 @@
     </ThoughtDef>
 
     <ThoughtDef>
+        <defName>RimScent_FireScent</defName>
+        <durationDays>1</durationDays>
+        <stackLimit>1</stackLimit>
+        <stages>
+            <li>
+                <label>burning fire</label>
+                <description>The blistering smell of an uncontrolled fire. It makes me uneasy.</description>
+                <baseMoodEffect>-2</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>RimScent_GeneratorScent</defName>
+        <durationDays>1</durationDays>
+        <stackLimit>1</stackLimit>
+        <stages>
+            <li>
+                <label>generator fumes</label>
+                <description>The scent of a running generator. I shouldn't be around it longer than necessary without a mask.</description>
+                <baseMoodEffect>-2</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
         <defName>RimScent_FirefoamScent</defName>
         <durationDays>1</durationDays>
         <stackLimit>1</stackLimit>

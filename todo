@@ -1,0 +1,52 @@
+core:
+- generators
+
+biotech:
+- waste packs
+
+vanilla furniture expanded:
+- firepit
+
+vanilla power expanded:
+- portable wood fired generator
+- portable chemfuel generator
+- industrial wood fired generator
+- industrial chemfuel generator
+
+vanilla factions expanded settlers:
+- chembroiler
+- chemshine
+- chemroot
+- bandana
+
+vanilla factions expanded pirates:
+- all warcasket helmets
+
+vanilla factions expanded classical:
+- beacon
+
+vanilla armor expanded:
+- riot helmet
+- stone war mask
+- HAZMAT mask
+- siegebreaker helmet
+
+vanilla apparel expanded:
+- surgeon mask
+- gas mask
+
+vanilla chemfuel expanded:
+- deepchem
+- deepchem refinery
+
+vanilla factions expanded empire:
+- techfriar crown
+- absolver helmet
+- janissary helmet
+
+vanilla recycling expanded:
+- reactive chempack
+- reclaimed biopack
+- trash
+- volatile toxpack
+- trashbrick
