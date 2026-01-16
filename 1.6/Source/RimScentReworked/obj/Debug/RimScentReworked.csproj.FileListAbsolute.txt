@@ -1,0 +1,6 @@
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ocarina-scent-framework\1.6\Assemblies\RimScentReworked.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ocarina-scent-framework\1.6\Assemblies\RimScentReworked.pdb
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ocarina-scent-framework\1.6\Source\RimScentReworked\obj\Debug\RimScentReworked.csproj.AssemblyReference.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ocarina-scent-framework\1.6\Source\RimScentReworked\obj\Debug\RimScentReworked.csproj.CoreCompileInputs.cache
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ocarina-scent-framework\1.6\Source\RimScentReworked\obj\Debug\RimScentReworked.dll
+C:\Program Files (x86)\Steam\steamapps\common\RimWorld\Mods\ocarina-scent-framework\1.6\Source\RimScentReworked\obj\Debug\RimScentReworked.pdb
