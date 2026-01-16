@@ -159,4 +159,30 @@
         </stages>
     </ThoughtDef>
 
+    <ThoughtDef>
+        <defName>RimScent_SmokeleafSmoke</defName>
+        <durationDays>1</durationDays>
+        <stackLimit>1</stackLimit>
+        <stages>
+            <li>
+                <label>smokeleaf smoke</label>
+                <description>The skunky smoke of burning smokeleaf hangs in the air. It's irritating.</description>
+                <baseMoodEffect>-2</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>RimScent_SmokeleafOdor</defName>
+        <durationDays>1</durationDays>
+        <stackLimit>1</stackLimit>
+        <stages>
+            <li>
+                <label>smokeleaf odor</label>
+                <description>The unmistakable smell of smokeleaf lingers in the air. It's distracting and not particularly pleasant.</description>
+                <baseMoodEffect>-1</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
 </Defs>

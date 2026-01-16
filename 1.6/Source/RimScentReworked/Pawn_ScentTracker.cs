@@ -62,14 +62,33 @@ namespace RimScentReworked
                 for (int i = 0; i < things.Count; i++)
                 {
                     Thing thing = things[i];
+                    if (thing is Pawn otherPawn && otherPawn != pawn)
+                    {
+                        HediffSet hediffs = otherPawn.health?.hediffSet;
+                        if (hediffs != null)
+                        {
+                            List<Hediff> allHediffs = hediffs.hediffs;
+                            for (int h = 0; h < allHediffs.Count; h++)
+                            {
+                                Hediff hediff = allHediffs[h];
+                                ModExtension_Scent ext = hediff.def.GetModExtension<ModExtension_Scent>();
+                                if (ext?.thought == null) continue;
+                                float mood = ext.thought.stages[0].baseMoodEffect;
+                                totals[ext.thought] =
+                                    totals.TryGetValue(ext.thought, out float v) ? v + mood : mood;
+                            }
+                        }
+                        continue;
+                    }
                     CompRefuelable refuelable = thing.TryGetComp<CompRefuelable>();
                     if (refuelable != null && !refuelable.HasFuel) continue;
                     CompPowerTrader power = thing.TryGetComp<CompPowerTrader>();
                     if (power != null && !power.PowerOn) continue;
-                    ModExtension_Scent ext = thing.def.GetModExtension<ModExtension_Scent>();
-                    if (ext?.thought == null) continue;
-                    float mood = ext.thought.stages[0].baseMoodEffect;
-                    totals[ext.thought] = totals.TryGetValue(ext.thought, out float v) ? v + mood : mood;
+                    ModExtension_Scent thingExt = thing.def.GetModExtension<ModExtension_Scent>();
+                    if (thingExt?.thought == null) continue;
+                    float thingMood = thingExt.thought.stages[0].baseMoodEffect;
+                    totals[thingExt.thought] =
+                        totals.TryGetValue(thingExt.thought, out float tv) ? tv + thingMood : thingMood;
                 }
             }
             foreach (GameCondition condition in pawn.Map.gameConditionManager.ActiveConditions)
@@ -112,7 +131,7 @@ namespace RimScentReworked
             float offset = baseMood * (smellFactor - 1f);
             if (dysomic)
             {
-                offset -= baseMood * 2f; // cancel + invert
+                offset -= baseMood * 2f;
             }
             mem.moodOffset = Mathf.RoundToInt(offset);
             pawn.needs.mood.thoughts.memories.TryGainMemory(mem);
