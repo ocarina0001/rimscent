@@ -141,7 +141,7 @@
             <li>
                 <label>foul bile</label>
                 <description>The pungent, sharp stench of internal fluids and decay. It lingers in the back of my throat.</description>
-                <baseMoodEffect>-6</baseMoodEffect>
+                <baseMoodEffect>-8</baseMoodEffect>
             </li>
         </stages>
     </ThoughtDef>

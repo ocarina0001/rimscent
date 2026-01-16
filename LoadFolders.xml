@@ -8,5 +8,6 @@
         <li IfModActive="ludeon.rimworld.biotech">1.6/Mods/Biotech</li>
         <li IfModActive="ludeon.rimworld.anomaly">1.6/Mods/Anomaly</li>
         <li IfModActive="ludeon.rimworld.odyssey">1.6/Mods/Odyssey</li>
+        <li IfModActive="dubwise.dubsbadhygiene">1.6/Mods/Dubs Bad Hygiene</li>
     </v1.6>
 </loadFolders>
