@@ -2,7 +2,7 @@
 <loadFolders>
     <v1.6>
         <li>1.6</li>
-        <li>Common</li>
+        <!-- <li>Common</li> -->
         <li IfModActive="ludeon.rimworld.royalty">1.6/Mods/Royalty</li>
         <li IfModActive="ludeon.rimworld.ideology">1.6/Mods/Ideology</li>
         <li IfModActive="ludeon.rimworld.biotech">1.6/Mods/Biotech</li>
