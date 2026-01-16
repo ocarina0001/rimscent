@@ -8,14 +8,15 @@ namespace RimScentReworked
 {
     public class Pawn_ScentTracker : ThingComp
     {
-        private const int TickInterval = 400;
         private const float ScentRadius = 8f;
         private ThoughtDef activeThought;
         private Pawn Pawn => parent as Pawn;
 
         public override void CompTick()
         {
-            if (Find.TickManager.TicksGame % TickInterval != 0) return;
+            int interval = RimScentReworkedMod.Settings?.scentTickInterval ?? 500;
+            if (interval <= 0) interval = 500;
+            if (Find.TickManager.TicksGame % interval != 0) return;
             Pawn pawn = Pawn;
             if (pawn == null || !pawn.Spawned || pawn.needs?.mood == null) return;
             UpdateScent(pawn);

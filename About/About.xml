@@ -7,4 +7,12 @@
         <li>1.6</li>
     </supportedVersions>
     <description>Adds an immersive scent system to RimWorld. Your colonists will now react to smells in their environment based on their traits and surroundings.</description>
+    <modDependencies>
+        <li>
+            <packageId>brrainz.harmony</packageId>
+            <displayName>Harmony</displayName>
+            <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+            <steamWorkshopUrl>https://steamcommunity.com/workshop/filedetails/?id=2009463077</steamWorkshopUrl>
+        </li>
+    </modDependencies>
 </ModMetaData>

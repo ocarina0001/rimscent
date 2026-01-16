@@ -59,6 +59,7 @@
     <Compile Include="Pawn_ScentTracker.cs" />
     <Compile Include="RimScentReworkedMod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RimScentReworkedSettings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
