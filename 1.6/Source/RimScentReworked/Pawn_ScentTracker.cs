@@ -42,10 +42,22 @@ namespace RimScentReworked
                     break;
                 }
             }
+            Room pawnRoom = pawn.GetRoom();
+            bool pawnOutdoors = pawnRoom == null || pawnRoom.PsychologicallyOutdoors;
             Dictionary<ThoughtDef, float> totals = new Dictionary<ThoughtDef, float>();
             foreach (IntVec3 cell in GenRadial.RadialCellsAround(pawn.Position, ScentRadius, true))
             {
                 if (!cell.InBounds(pawn.Map)) continue;
+                Room cellRoom = cell.GetRoom(pawn.Map);
+                bool cellOutdoors = cellRoom == null || cellRoom.PsychologicallyOutdoors;
+                if (pawnOutdoors)
+                {
+                    if (!cellOutdoors) continue;
+                }
+                else
+                {
+                    if (cellRoom != pawnRoom) continue;
+                }
                 List<Thing> things = pawn.Map.thingGrid.ThingsListAtFast(cell);
                 for (int i = 0; i < things.Count; i++)
                 {
@@ -100,7 +112,7 @@ namespace RimScentReworked
             float offset = baseMood * (smellFactor - 1f);
             if (dysomic)
             {
-                offset -= baseMood * 2f; // cancels + flips base mood
+                offset -= baseMood * 2f; // cancel + invert
             }
             mem.moodOffset = Mathf.RoundToInt(offset);
             pawn.needs.mood.thoughts.memories.TryGainMemory(mem);
