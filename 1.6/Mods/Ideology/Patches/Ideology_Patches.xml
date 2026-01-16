@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Patch>
+
+    <Operation Class="PatchOperationAdd">
+        <xpath>Defs/ThingDef[defName="Apparel_VisageMask"]/equippedStatOffsets</xpath>
+        <value>
+            <RimScent_SmellSensitivity>-0.1</RimScent_SmellSensitivity>
+        </value>
+    </Operation>
+
+</Patch>
