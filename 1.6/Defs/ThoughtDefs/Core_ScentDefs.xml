@@ -170,6 +170,13 @@
                 <baseMoodEffect>-2</baseMoodEffect>
             </li>
         </stages>
+        <nullifyingPrecepts>
+            <li MayRequire="ludeon.rimworld.ideology">DrugUse_Essential</li>
+        </nullifyingPrecepts>
+        <nullifyingTraitDegrees>
+            <DrugDesire>2</DrugDesire>
+            <DrugDesire>1</DrugDesire>
+        </nullifyingTraitDegrees>
     </ThoughtDef>
 
     <ThoughtDef>
@@ -183,6 +190,13 @@
                 <baseMoodEffect>-1</baseMoodEffect>
             </li>
         </stages>
+        <nullifyingPrecepts>
+            <li MayRequire="ludeon.rimworld.ideology">DrugUse_Essential</li>
+        </nullifyingPrecepts>
+        <nullifyingTraitDegrees>
+            <DrugDesire>2</DrugDesire>
+            <DrugDesire>1</DrugDesire>
+        </nullifyingTraitDegrees>
     </ThoughtDef>
 
 </Defs>
