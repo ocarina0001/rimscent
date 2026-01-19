@@ -3,7 +3,7 @@
 
     <ThoughtDef>
         <defName>RimScent_BadHygiene</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -16,7 +16,7 @@
 
     <ThoughtDef>
         <defName>RimScent_Feces</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -29,7 +29,7 @@
 
     <ThoughtDef>
         <defName>RimScent_Urine</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -42,7 +42,7 @@
 
     <!-- <ThoughtDef>
         <defName>RimScent_Biosolids</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>

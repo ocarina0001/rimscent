@@ -3,7 +3,7 @@
 
     <ThoughtDef>
         <defName>RimScent_TwistedFleshScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -16,7 +16,7 @@
 
     <ThoughtDef>
         <defName>RimScent_GrayFleshScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>

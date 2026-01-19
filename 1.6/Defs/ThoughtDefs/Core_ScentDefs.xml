@@ -5,7 +5,7 @@
 
     <ThoughtDef>
         <defName>RimScent_VomitScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -18,7 +18,7 @@
 
     <ThoughtDef>
         <defName>RimScent_BloodScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -31,7 +31,7 @@
 
     <ThoughtDef>
         <defName>RimScent_TrashScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -44,7 +44,7 @@
 
     <ThoughtDef>
         <defName>RimScent_AshScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -57,7 +57,7 @@
 
     <ThoughtDef>
         <defName>RimScent_FuelScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -70,7 +70,7 @@
 
     <ThoughtDef>
         <defName>RimScent_DirtScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -83,7 +83,7 @@
 
     <ThoughtDef>
         <defName>RimScent_ExplosionScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -96,7 +96,7 @@
 
     <ThoughtDef>
         <defName>RimScent_FireScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -109,7 +109,7 @@
 
     <ThoughtDef>
         <defName>RimScent_GeneratorScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -122,7 +122,7 @@
 
     <ThoughtDef>
         <defName>RimScent_FirefoamScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -135,7 +135,7 @@
 
     <ThoughtDef>
         <defName>RimScent_CampfireScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -148,7 +148,7 @@
 
     <ThoughtDef>
         <defName>RimScent_PetrichorScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -161,7 +161,7 @@
 
     <ThoughtDef>
         <defName>RimScent_BileScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -174,7 +174,7 @@
 
     <ThoughtDef>
         <defName>RimScent_ToxicScent</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -187,7 +187,7 @@
 
     <ThoughtDef>
         <defName>RimScent_SmokeleafSmoke</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -207,7 +207,7 @@
 
     <ThoughtDef>
         <defName>RimScent_SmokeleafOdor</defName>
-        <durationDays>1</durationDays>
+        <durationDays>0.1</durationDays>
         <stackLimit>1</stackLimit>
         <stages>
             <li>
@@ -223,6 +223,19 @@
             <DrugDesire>2</DrugDesire>
             <DrugDesire>1</DrugDesire>
         </nullifyingTraitDegrees>
+    </ThoughtDef>
+
+    <ThoughtDef>
+        <defName>RimScent_FloweryScent</defName>
+        <durationDays>0.1</durationDays>
+        <stackLimit>1</stackLimit>
+        <stages>
+            <li>
+                <label>flowery scent</label>
+                <description>The fresh and slightly earthy smell of a nearby flower.</description>
+                <baseMoodEffect>2</baseMoodEffect>
+            </li>
+        </stages>
     </ThoughtDef>
 
 </Defs>

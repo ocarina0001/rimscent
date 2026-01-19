@@ -19,6 +19,11 @@ namespace RimScentReworked
             if (Find.TickManager.TicksGame % interval != 0) return;
             Pawn pawn = Pawn;
             if (pawn == null || !pawn.Spawned || pawn.needs?.mood == null) return;
+            if (!PawnAllowedToSmell(pawn))
+            {
+                ClearThought(pawn);
+                return;
+            }
             UpdateScent(pawn);
         }
 
@@ -52,13 +57,9 @@ namespace RimScentReworked
                 Room cellRoom = cell.GetRoom(pawn.Map);
                 bool cellOutdoors = cellRoom == null || cellRoom.PsychologicallyOutdoors;
                 if (pawnOutdoors)
-                {
                     if (!cellOutdoors) continue;
-                }
                 else
-                {
                     if (cellRoom != pawnRoom) continue;
-                }
                 List<Thing> things = pawn.Map.thingGrid.ThingsListAtFast(cell);
                 for (int i = 0; i < things.Count; i++)
                 {
@@ -114,28 +115,48 @@ namespace RimScentReworked
                 ClearThought(pawn);
                 return;
             }
-            ThoughtDef winner = null;
-            float winnerValue = 0f;
-            foreach (var pair in totals)
+            bool uncapped = RimScentReworkedMod.Settings?.uncappedScents ?? false;
+            if (!uncapped)
             {
-                if (Math.Abs(pair.Value) > Math.Abs(winnerValue))
+                ThoughtDef winner = null;
+                float winnerValue = 0f;
+                foreach (var pair in totals)
                 {
-                    winner = pair.Key;
-                    winnerValue = pair.Value;
+                    if (Math.Abs(pair.Value) > Math.Abs(winnerValue))
+                    {
+                        winner = pair.Key;
+                        winnerValue = pair.Value;
+                    }
+                }
+                if (winner == null) return;
+                if (winner == activeThought && PawnHasThought(pawn, winner))
+                    return;
+                ClearThought(pawn);
+                activeThought = winner;
+                Thought_Memory mem = (Thought_Memory)ThoughtMaker.MakeThought(winner);
+                float baseMood = winner.stages[0].baseMoodEffect;
+                float offset = baseMood * (smellFactor - 1f);
+                if (dysomic)
+                    offset -= baseMood * 2f;
+                mem.moodOffset = Mathf.RoundToInt(offset);
+                pawn.needs.mood.thoughts.memories.TryGainMemory(mem);
+            }
+            else
+            {
+                ClearThought(pawn);
+                activeThought = null;
+                foreach (var pair in totals)
+                {
+                    ThoughtDef def = pair.Key;
+                    float baseMood = def.stages[0].baseMoodEffect;
+                    Thought_Memory mem = (Thought_Memory)ThoughtMaker.MakeThought(def);
+                    float offset = baseMood * (smellFactor - 1f);
+                    if (dysomic)
+                        offset -= baseMood * 2f;
+                    mem.moodOffset = Mathf.RoundToInt(offset);
+                    pawn.needs.mood.thoughts.memories.TryGainMemory(mem);
                 }
             }
-            if (winner == null || winner == activeThought) return;
-            ClearThought(pawn);
-            activeThought = winner;
-            Thought_Memory mem = (Thought_Memory)ThoughtMaker.MakeThought(winner);
-            float baseMood = winner.stages[0].baseMoodEffect;
-            float offset = baseMood * (smellFactor - 1f);
-            if (dysomic)
-            {
-                offset -= baseMood * 2f;
-            }
-            mem.moodOffset = Mathf.RoundToInt(offset);
-            pawn.needs.mood.thoughts.memories.TryGainMemory(mem);
         }
 
         private void ClearThought(Pawn pawn)
@@ -143,6 +164,30 @@ namespace RimScentReworked
             if (activeThought == null) return;
             pawn.needs.mood.thoughts.memories.RemoveMemoriesOfDef(activeThought);
             activeThought = null;
+        }
+        private bool PawnHasThought(Pawn pawn, ThoughtDef def)
+        {
+            return pawn.needs.mood.thoughts.memories.Memories.Any(m => m.def == def);
+        }
+
+        private bool PawnAllowedToSmell(Pawn pawn)
+        {
+            var settings = RimScentReworkedMod.Settings;
+            if (settings == null) return true;
+            if (pawn.IsColonist)
+                return settings.colonistsCanSmell;
+            if (pawn.IsPrisoner)
+                return settings.prisonersCanSmell;
+            if (pawn.IsSlave)
+                return settings.slavesCanSmell;
+            if (pawn.Faction != null)
+            {
+                if (pawn.Faction.HostileTo(Faction.OfPlayer))
+                    return settings.enemyFactionsCanSmell;
+                else
+                    return settings.friendlyFactionsCanSmell;
+            }
+            return true;
         }
 
         public override void PostExposeData()
