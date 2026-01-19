@@ -4,7 +4,7 @@
     <ThoughtDef>
         <defName>RimScent_BadHygiene</defName>
         <durationDays>0.1</durationDays>
-        <stackLimit>1</stackLimit>
+        <stackLimit>4</stackLimit>
         <stages>
             <li>
                 <label>smelly individual</label>
@@ -17,7 +17,7 @@
     <ThoughtDef>
         <defName>RimScent_Feces</defName>
         <durationDays>0.1</durationDays>
-        <stackLimit>1</stackLimit>
+        <stackLimit>4</stackLimit>
         <stages>
             <li>
                 <label>stench of feces</label>
@@ -30,7 +30,7 @@
     <ThoughtDef>
         <defName>RimScent_Urine</defName>
         <durationDays>0.1</durationDays>
-        <stackLimit>1</stackLimit>
+        <stackLimit>4</stackLimit>
         <stages>
             <li>
                 <label>stench of urine</label>
@@ -43,7 +43,7 @@
     <!-- <ThoughtDef>
         <defName>RimScent_Biosolids</defName>
         <durationDays>0.1</durationDays>
-        <stackLimit>1</stackLimit>
+        <stackLimit>4</stackLimit>
         <stages>
             <li>
                 <label>stench of biosolids</label>

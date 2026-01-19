@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -50,7 +51,7 @@ namespace RimScentReworked
             }
             Room pawnRoom = pawn.GetRoom();
             bool pawnOutdoors = pawnRoom == null || pawnRoom.PsychologicallyOutdoors;
-            Dictionary<ThoughtDef, float> totals = new Dictionary<ThoughtDef, float>();
+            List<ThoughtDef> scentsToApply = new List<ThoughtDef>();
             foreach (IntVec3 cell in GenRadial.RadialCellsAround(pawn.Position, ScentRadius, true))
             {
                 if (!cell.InBounds(pawn.Map)) continue;
@@ -58,7 +59,7 @@ namespace RimScentReworked
                 bool cellOutdoors = cellRoom == null || cellRoom.PsychologicallyOutdoors;
                 if (pawnOutdoors)
                     if (!cellOutdoors) continue;
-                else
+                    else
                     if (cellRoom != pawnRoom) continue;
                 List<Thing> things = pawn.Map.thingGrid.ThingsListAtFast(cell);
                 for (int i = 0; i < things.Count; i++)
@@ -75,9 +76,7 @@ namespace RimScentReworked
                                 Hediff hediff = allHediffs[h];
                                 ModExtension_Scent ext = hediff.def.GetModExtension<ModExtension_Scent>();
                                 if (ext?.thought == null) continue;
-                                float mood = ext.thought.stages[0].baseMoodEffect;
-                                totals[ext.thought] =
-                                    totals.TryGetValue(ext.thought, out float v) ? v + mood : mood;
+                                scentsToApply.Add(ext.thought);
                             }
                         }
                         continue;
@@ -88,73 +87,46 @@ namespace RimScentReworked
                     if (power != null && !power.PowerOn) continue;
                     ModExtension_Scent thingExt = thing.def.GetModExtension<ModExtension_Scent>();
                     if (thingExt?.thought == null) continue;
-                    float thingMood = thingExt.thought.stages[0].baseMoodEffect;
-                    totals[thingExt.thought] =
-                        totals.TryGetValue(thingExt.thought, out float tv) ? tv + thingMood : thingMood;
+                    scentsToApply.Add(thingExt.thought);
                 }
             }
             foreach (GameCondition condition in pawn.Map.gameConditionManager.ActiveConditions)
             {
                 ModExtension_Scent ext = condition.def.GetModExtension<ModExtension_Scent>();
                 if (ext?.thought == null) continue;
-                float mood = ext.thought.stages[0].baseMoodEffect;
-                totals[ext.thought] = totals.TryGetValue(ext.thought, out float v) ? v + mood : mood;
+                scentsToApply.Add(ext.thought);
             }
             WeatherDef weather = pawn.Map.weatherManager.curWeather;
             if (weather != null)
             {
                 ModExtension_Scent ext = weather.GetModExtension<ModExtension_Scent>();
                 if (ext?.thought != null)
-                {
-                    float mood = ext.thought.stages[0].baseMoodEffect;
-                    totals[ext.thought] = totals.TryGetValue(ext.thought, out float v) ? v + mood : mood;
-                }
+                    scentsToApply.Add(ext.thought);
             }
-            if (totals.Count == 0)
-            {
-                ClearThought(pawn);
+            if (scentsToApply.Count == 0)
                 return;
-            }
             bool uncapped = RimScentReworkedMod.Settings?.uncappedScents ?? false;
             if (!uncapped)
             {
-                ThoughtDef winner = null;
-                float winnerValue = 0f;
-                foreach (var pair in totals)
-                {
-                    if (Math.Abs(pair.Value) > Math.Abs(winnerValue))
-                    {
-                        winner = pair.Key;
-                        winnerValue = pair.Value;
-                    }
-                }
+                ThoughtDef winner = scentsToApply.GroupBy(t => t).OrderByDescending(g => Mathf.Abs(g.Key.stages[0].baseMoodEffect) * Mathf.Min(g.Count(), g.Key.stackLimit)).Select(g => g.Key).FirstOrDefault();
                 if (winner == null) return;
-                if (winner == activeThought && PawnHasThought(pawn, winner))
-                    return;
                 ClearThought(pawn);
                 activeThought = winner;
-                Thought_Memory mem = (Thought_Memory)ThoughtMaker.MakeThought(winner);
-                float baseMood = winner.stages[0].baseMoodEffect;
-                float offset = baseMood * (smellFactor - 1f);
-                if (dysomic)
-                    offset -= baseMood * 2f;
-                mem.moodOffset = Mathf.RoundToInt(offset);
-                pawn.needs.mood.thoughts.memories.TryGainMemory(mem);
+                int desired = scentsToApply.Count(t => t == winner);
+                AddMemory(pawn, winner, desired, smellFactor, dysomic);
+                RemoveExcessMemory(pawn, winner, desired);
             }
             else
             {
                 ClearThought(pawn);
                 activeThought = null;
-                foreach (var pair in totals)
+                Dictionary<ThoughtDef, int> sourceCounts = new Dictionary<ThoughtDef, int>();
+                foreach (ThoughtDef def in scentsToApply)
+                    sourceCounts[def] = sourceCounts.TryGetValue(def, out int c) ? c + 1 : 1;
+                foreach (var pair in sourceCounts)
                 {
-                    ThoughtDef def = pair.Key;
-                    float baseMood = def.stages[0].baseMoodEffect;
-                    Thought_Memory mem = (Thought_Memory)ThoughtMaker.MakeThought(def);
-                    float offset = baseMood * (smellFactor - 1f);
-                    if (dysomic)
-                        offset -= baseMood * 2f;
-                    mem.moodOffset = Mathf.RoundToInt(offset);
-                    pawn.needs.mood.thoughts.memories.TryGainMemory(mem);
+                    AddMemory(pawn, pair.Key, pair.Value, smellFactor, dysomic);
+                    RemoveExcessMemory(pawn, pair.Key, pair.Value);
                 }
             }
         }
@@ -165,9 +137,40 @@ namespace RimScentReworked
             pawn.needs.mood.thoughts.memories.RemoveMemoriesOfDef(activeThought);
             activeThought = null;
         }
-        private bool PawnHasThought(Pawn pawn, ThoughtDef def)
+
+        private void AddMemory(Pawn pawn, ThoughtDef def, int desired, float smellFactor, bool dysomic)
         {
-            return pawn.needs.mood.thoughts.memories.Memories.Any(m => m.def == def);
+            int existing = CountThought(pawn, def);
+            int stackLimit = def.stackLimit > 0 ? def.stackLimit : 1;
+            int target = Mathf.Min(desired, stackLimit);
+            int toAdd = target - existing;
+            if (toAdd <= 0) return;
+            for (int i = 0; i < toAdd; i++)
+            {
+                Thought_Memory mem = (Thought_Memory)ThoughtMaker.MakeThought(def);
+                float baseMood = def.stages[0].baseMoodEffect;
+                float offset = baseMood * (smellFactor - 1f);
+                if (dysomic)
+                    offset -= baseMood * 2f;
+                mem.moodOffset = Mathf.RoundToInt(offset);
+                pawn.needs.mood.thoughts.memories.TryGainMemory(mem);
+            }
+        }
+
+        private void RemoveExcessMemory(Pawn pawn, ThoughtDef def, int desired)
+        {
+            int stackLimit = def.stackLimit > 0 ? def.stackLimit : 1;
+            int target = Mathf.Min(desired, stackLimit);
+            List<Thought_Memory> memories = pawn.needs.mood.thoughts.memories.Memories.Where(m => m.def == def).ToList();
+            int excess = memories.Count - target;
+            if (excess <= 0) return;
+            for (int i = 0; i < excess; i++)
+                pawn.needs.mood.thoughts.memories.RemoveMemory(memories[i]);
+        }
+
+        private int CountThought(Pawn pawn, ThoughtDef def)
+        {
+            return pawn.needs.mood.thoughts.memories.Memories.Count(m => m.def == def);
         }
 
         private bool PawnAllowedToSmell(Pawn pawn)

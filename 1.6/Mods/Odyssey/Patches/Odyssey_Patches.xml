@@ -9,9 +9,9 @@
     </Operation>
 
     <Operation Class="PatchOperationConditional">
-        <xpath>Defs/GameConditionDef[defName="ToxRain"]/modExtensions</xpath>
+        <xpath>Defs/WeatherDef[defName="ToxRain"]/modExtensions</xpath>
         <match Class="PatchOperationAdd">            <!-- mod extensions exists here -->
-            <xpath>Defs/GameConditionDef[defName="ToxRain"]/modExtensions</xpath>
+            <xpath>Defs/WeatherDef[defName="ToxRain"]/modExtensions</xpath>
             <value>
                 <li Class="RimScentReworked.ModExtension_Scent">
                     <thought>RimScent_ToxicScent</thought>
@@ -19,7 +19,7 @@
             </value>
         </match>
         <nomatch Class="PatchOperationAdd">            <!-- modextensions does not exist here, so we add it ourselves-->
-            <xpath>Defs/GameConditionDef[defName="ToxRain"]</xpath>
+            <xpath>Defs/WeatherDef[defName="ToxRain"]</xpath>
             <value>
                 <modExtensions>
                     <li Class="RimScentReworked.ModExtension_Scent">
@@ -31,9 +31,9 @@
     </Operation>
 
     <Operation Class="PatchOperationConditional">
-        <xpath>Defs/GameConditionDef[defName="Sandstorm"]/modExtensions</xpath>
+        <xpath>Defs/WeatherDef[defName="Sandstorm"]/modExtensions</xpath>
         <match Class="PatchOperationAdd">            <!-- mod extensions exists here -->
-            <xpath>Defs/GameConditionDef[defName="Sandstorm"]/modExtensions</xpath>
+            <xpath>Defs/WeatherDef[defName="Sandstorm"]/modExtensions</xpath>
             <value>
                 <li Class="RimScentReworked.ModExtension_Scent">
                     <thought>RimScent_DirtScent</thought>
@@ -41,7 +41,7 @@
             </value>
         </match>
         <nomatch Class="PatchOperationAdd">            <!-- modextensions does not exist here, so we add it ourselves-->
-            <xpath>Defs/GameConditionDef[defName="Sandstorm"]</xpath>
+            <xpath>Defs/WeatherDef[defName="Sandstorm"]</xpath>
             <value>
                 <modExtensions>
                     <li Class="RimScentReworked.ModExtension_Scent">

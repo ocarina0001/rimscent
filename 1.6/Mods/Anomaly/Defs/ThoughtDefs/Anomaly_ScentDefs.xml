@@ -4,7 +4,7 @@
     <ThoughtDef>
         <defName>RimScent_TwistedFleshScent</defName>
         <durationDays>0.1</durationDays>
-        <stackLimit>1</stackLimit>
+        <stackLimit>4</stackLimit>
         <stages>
             <li>
                 <label>stench of twisted flesh</label>
@@ -17,7 +17,7 @@
     <ThoughtDef>
         <defName>RimScent_GrayFleshScent</defName>
         <durationDays>0.1</durationDays>
-        <stackLimit>1</stackLimit>
+        <stackLimit>4</stackLimit>
         <stages>
             <li>
                 <label>stench of gray flesh</label>
