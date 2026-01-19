@@ -10,6 +10,7 @@ namespace RimScentReworked
     public class Pawn_ScentTracker : ThingComp
     {
         private const float ScentRadius = 8f;
+        private int scentTickOffset;
         private ThoughtDef activeThought;
         private Pawn Pawn => parent as Pawn;
 
@@ -17,7 +18,10 @@ namespace RimScentReworked
         {
             int interval = RimScentReworkedMod.Settings?.scentTickInterval ?? 500;
             if (interval <= 0) interval = 500;
-            if (Find.TickManager.TicksGame % interval != 0) return;
+            if (scentTickOffset == 0)
+                scentTickOffset = Rand.Range(0, interval);
+            if ((Find.TickManager.TicksGame + scentTickOffset) % interval != 0)
+                return;
             Pawn pawn = Pawn;
             if (pawn == null || !pawn.Spawned || pawn.needs?.mood == null) return;
             if (!PawnAllowedToSmell(pawn))
@@ -108,13 +112,21 @@ namespace RimScentReworked
             bool uncapped = RimScentReworkedMod.Settings?.uncappedScents ?? false;
             if (!uncapped)
             {
-                ThoughtDef winner = scentsToApply.GroupBy(t => t).OrderByDescending(g => Mathf.Abs(g.Key.stages[0].baseMoodEffect) * Mathf.Min(g.Count(), g.Key.stackLimit)).Select(g => g.Key).FirstOrDefault();
+                ThoughtDef winner = scentsToApply.GroupBy(t => t).OrderByDescending(g => ThoughtMagnitude(pawn, g.Key, g.Count())).Select(g => g.Key).FirstOrDefault();
                 if (winner == null) return;
+                int winnerCount = scentsToApply.Count(t => t == winner);
+                float winnerMagnitude = ThoughtMagnitude(pawn, winner, winnerCount);
+                if (activeThought != null)
+                {
+                    int existingCount = CountThought(pawn, activeThought);
+                    float existingMagnitude = ThoughtMagnitude(pawn, activeThought, existingCount);
+                    if (winnerMagnitude <= existingMagnitude)
+                        return;
+                }
                 ClearThought(pawn);
                 activeThought = winner;
-                int desired = scentsToApply.Count(t => t == winner);
-                AddMemory(pawn, winner, desired, smellFactor, dysomic);
-                RemoveExcessMemory(pawn, winner, desired);
+                AddMemory(pawn, winner, winnerCount, smellFactor, dysomic);
+                RemoveExcessMemory(pawn, winner, winnerCount);
             }
             else
             {
@@ -193,8 +205,16 @@ namespace RimScentReworked
             return true;
         }
 
+        private float ThoughtMagnitude(Pawn pawn, ThoughtDef def, int sourceCount)
+        {
+            int stackLimit = def.stackLimit > 0 ? def.stackLimit : 1;
+            int effective = Mathf.Min(sourceCount, stackLimit);
+            return Mathf.Abs(def.stages[0].baseMoodEffect) * effective;
+        }
+
         public override void PostExposeData()
         {
+            Scribe_Values.Look(ref scentTickOffset, "scentTickOffset", 0);
             Scribe_Defs.Look(ref activeThought, "activeThought");
         }
     }
