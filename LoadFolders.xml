@@ -9,5 +9,15 @@
         <li IfModActive="ludeon.rimworld.anomaly">1.6/Mods/Anomaly</li>
         <li IfModActive="ludeon.rimworld.odyssey">1.6/Mods/Odyssey</li>
         <li IfModActive="dubwise.dubsbadhygiene">1.6/Mods/Dubs Bad Hygiene</li>
+        <li IfModActive="vanillaexpanded.vfecore">1.6/Mods/Vanilla Furniture Expanded</li>
+        <li IfModActive="vanillaexpanded.vfepower">1.6/Mods/Vanilla Furniture Expanded - Power</li>
+        <li IfModActive="oskarpotocki.vanillafactionsexpanded.settlersmodule">1.6/Mods/Vanilla Factions Expanded - Settlers</li>
+        <li IfModActive="oskarpotocki.vfe.classical">1.6/Mods/Vanilla Factions Expanded - Classical</li>
+        <li IfModActive="vanillaexpanded.varme">1.6/Mods/Vanilla Armour Expanded</li>
+        <li IfModActive="vanillaexpanded.vappe">1.6/Mods/Vanilla Apparel Expanded</li>
+        <li IfModActive="vanillaexpanded.vchemfuele">1.6/Mods/Vanilla Chemfuel Expanded</li>
+        <li IfModActive="oskarpotocki.vfe.empire">1.6/Mods/Vanilla Factions Expanded - Empire</li>
+        <li IfModActive="vanillaexpanded.recycling">1.6/Mods/Vanilla Recycling Expanded</li>
+        <li IfModActive="oskarpotocki.vfe.medieval2">1.6/Mods/Vanilla Factions Expanded - Medieval 2</li>
     </v1.6>
 </loadFolders>

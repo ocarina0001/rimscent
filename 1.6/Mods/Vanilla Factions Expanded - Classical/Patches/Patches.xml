@@ -1,29 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Patch>
 
-    <Operation Class="PatchOperationAdd">
-        <xpath>Defs/ThingDef[defName="Apparel_GasMask"]/equippedStatOffsets</xpath>
-        <value>
-            <RimScent_SmellSensitivity>-0.8</RimScent_SmellSensitivity>
-        </value>
-    </Operation>
-
     <Operation Class="PatchOperationConditional">
-        <xpath>Defs/ThingDef[defName="ToxifierGenerator" or defName="Wastepack"]/modExtensions</xpath>
+        <xpath>Defs/ThingDef[defName="VFEC_Beacon"]/modExtensions</xpath>
         <match Class="PatchOperationAdd">            <!-- mod extensions exists here -->
-            <xpath>Defs/ThingDef[defName="ToxifierGenerator" or defName="Wastepack"]/modExtensions</xpath>
+            <xpath>Defs/ThingDef[defName="VFEC_Beacon"]/modExtensions</xpath>
             <value>
                 <li Class="RimScentReworked.ModExtension_Scent">
-                    <thought>RimScent_ToxicScent</thought>
+                    <thought>RimScent_CampfireScent</thought>
                 </li>
             </value>
         </match>
         <nomatch Class="PatchOperationAdd">            <!-- modextensions does not exist here, so we add it ourselves-->
-            <xpath>Defs/ThingDef[defName="ToxifierGenerator" or defName="Wastepack"]</xpath>
+            <xpath>Defs/ThingDef[defName="VFEC_Beacon"]</xpath>
             <value>
                 <modExtensions>
                     <li Class="RimScentReworked.ModExtension_Scent">
-                        <thought>RimScent_ToxicScent</thought>
+                        <thought>RimScent_CampfireScent</thought>
                     </li>
                 </modExtensions>
             </value>
