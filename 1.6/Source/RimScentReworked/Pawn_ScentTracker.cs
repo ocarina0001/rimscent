@@ -9,7 +9,6 @@ namespace RimScentReworked
 {
     public class Pawn_ScentTracker : ThingComp
     {
-        private const float ScentRadius = 8f;
         private int scentTickOffset;
         private ThoughtDef activeThought;
         private Pawn Pawn => parent as Pawn;
@@ -56,9 +55,11 @@ namespace RimScentReworked
             Room pawnRoom = pawn.GetRoom();
             bool pawnOutdoors = pawnRoom == null || pawnRoom.PsychologicallyOutdoors;
             List<ThoughtDef> scentsToApply = new List<ThoughtDef>();
-            foreach (IntVec3 cell in GenRadial.RadialCellsAround(pawn.Position, ScentRadius, true))
+            int radius = RimScentReworkedMod.Settings?.scentRadius?? 8;
+            foreach (IntVec3 cell in GenRadial.RadialCellsAround(pawn.Position, radius, true))
             {
                 if (!cell.InBounds(pawn.Map)) continue;
+                if (!GenSight.LineOfSight(pawn.Position, cell, pawn.Map, true)) continue;
                 Room cellRoom = cell.GetRoom(pawn.Map);
                 bool cellOutdoors = cellRoom == null || cellRoom.PsychologicallyOutdoors;
                 if (pawnOutdoors)

@@ -27,7 +27,10 @@ namespace RimScentReworked
             list.Begin(inRect);
             list.Label($"Smell check interval (default: 500): {Settings.scentTickInterval} ticks");
             list.Label("How often pawns evaluate nearby scents.\nLower values are more responsive but cost more performance.");
-            Settings.scentTickInterval = (int)list.Slider(Settings.scentTickInterval, 60, 2000);
+            Settings.scentTickInterval = (int)list.Slider(Settings.scentTickInterval, 60, 1000);
+            list.Label($"Smell radius (default: 8): {Settings.scentRadius}");
+            list.Label("The radius in which a pawn can smell.\nLower values can increase performance but limit smelling range.");
+            Settings.scentRadius = (int)list.Slider(Settings.scentRadius, 2, 32);
             list.CheckboxLabeled("Uncapped mode", ref Settings.uncappedScents, "If enabled, pawns can experience multiple scent mood effects simultaneously instead of only the strongest one.");
             list.GapLine();
             list.Label("Pawn scent eligibility:");
