@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: stench of gray flesh -->
+  <RimScent_GrayFleshScent.stages.stench_of_gray_flesh.label>odeur nauséabonde de chair grise</RimScent_GrayFleshScent.stages.stench_of_gray_flesh.label>
+  <!-- EN: This residue smells like old copper and burnt hair. An unnatural, disturbing scent that shouldn't exist. -->
+  <RimScent_GrayFleshScent.stages.stench_of_gray_flesh.description>Ce résidu sent le vieux cuivre et les cheveux brûlés. Une odeur artificielle et dérangeante qui ne devrait pas exister.</RimScent_GrayFleshScent.stages.stench_of_gray_flesh.description>
+  
+  <!-- EN: stench of twisted flesh -->
+  <RimScent_TwistedFleshScent.stages.stench_of_twisted_flesh.label>odeur nauséabonde de chair décomposée</RimScent_TwistedFleshScent.stages.stench_of_twisted_flesh.label>
+  <!-- EN: A nauseating smell of raw meat and unnatural, rapid growth. It smells wrong. -->
+  <RimScent_TwistedFleshScent.stages.stench_of_twisted_flesh.description>Une odeur nauséabonde de viande crue et de croissance rapide et anormale. Ça sent mauvais.</RimScent_TwistedFleshScent.stages.stench_of_twisted_flesh.description>
+  
+</LanguageData>
