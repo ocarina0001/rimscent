@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: stench of chemicals -->
+  <RimScent_ReactiveChempackScent.stages.stench_of_chemicals.label>odeur de produits chimiques</RimScent_ReactiveChempackScent.stages.stench_of_chemicals.label>
+  <!-- EN: The burning stench of chemicals. -->
+  <RimScent_ReactiveChempackScent.stages.stench_of_chemicals.description>L'odeur âcre des produits chimiques.</RimScent_ReactiveChempackScent.stages.stench_of_chemicals.description>
+  
+  <!-- EN: stench of biomatter -->
+  <RimScent_ReclaimedBiopackScent.stages.stench_of_biomatter.label>odeur de matière organique</RimScent_ReclaimedBiopackScent.stages.stench_of_biomatter.label>
+  <!-- EN: The very earthy smell of biomatter, it's unpleasant. -->
+  <RimScent_ReclaimedBiopackScent.stages.stench_of_biomatter.description>L'odeur très terreuse de la matière organique, c'est désagréable.</RimScent_ReclaimedBiopackScent.stages.stench_of_biomatter.description>
+  
+</LanguageData>
