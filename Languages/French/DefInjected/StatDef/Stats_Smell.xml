@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<LanguageData>
-  
-  <!-- EN: smell sensitivity -->
-  <RimScent_SmellSensitivity.label>sensibilité aux odeurs</RimScent_SmellSensitivity.label>
-  <!-- EN: How sensitive this pawn is to smells. -->
-  <RimScent_SmellSensitivity.description>À quel point ce pion est sensible aux odeurs.</RimScent_SmellSensitivity.description>
-  
-</LanguageData>
