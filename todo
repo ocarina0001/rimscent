@@ -1,0 +1,12 @@
+- add a more things in ModExtension_Scent called "dysomicGenes" and "dysomicTraits" which takes a list of genes or traits and if the pawn has them, treat it as dysomic and reverse it
+- add a mod setting to prevent smells from being smelled if they're outside of the home zone
+- add a mod setting to enable / disable mood stacking (so only 1 thought ever applied instead of up to the mood's stack limit)
+
+Patch Notes
+- Added support for more base game flowers that I forgot
+- Added three new genes for each of the existing traits
+- Added (some) support for Combat Extended (black powder smoke unfortunately cannot be given a smell at the moment due to limitations of the game)
+- Added support for Overflowing Flowers
+- Improved nose identification system (birds can smell now)
+- Modified Biotech's Wasters xenotype to be genetically dyosmic
+- Modified the flu, animal flu, and fibrous mechanites to influence a pawn's smelling capacity

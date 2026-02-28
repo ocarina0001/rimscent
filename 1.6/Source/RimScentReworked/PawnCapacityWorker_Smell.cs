@@ -12,7 +12,7 @@ namespace RimScentReworked
             BodyPartRecord nose = null;
             foreach (var part in diffSet.GetNotMissingParts())
             {
-                if (part.def.defName == "Nose")
+                if (part.def.defName.ToLower().Contains("nose") || part.def.defName.ToLower().Contains("beak"))
                 {
                     nose = part;
                     break;
