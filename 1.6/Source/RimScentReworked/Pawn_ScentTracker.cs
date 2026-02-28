@@ -43,22 +43,69 @@ namespace RimScentReworked
                 ClearThought(pawn);
                 return;
             }
-            bool dysomic = false;
+            bool pawnHasDysosmicTrait = false;
             foreach (Trait t in pawn.story?.traits?.allTraits ?? new List<Trait>())
             {
-                if (t.def.GetModExtension<ModExtension_Dysomic>() != null)
+                if (t.def.GetModExtension<ModExtension_Dysosmic>() != null)
                 {
-                    dysomic = true;
+                    pawnHasDysosmicTrait = true;
                     break;
                 }
             }
+            bool HasDysosmicGene(Pawn p)
+            {
+                if (p?.genes == null) return false;
+                foreach (Gene gene in p.genes.GenesListForReading)
+                {
+                    if (gene.def.defName.StartsWith("Dysosmic") || gene.def.defName.Contains("Dysosmic"))
+                        return true;
+                }
+                return false;
+            }
+            bool IsScentDysosmicForPawn(Pawn p, ModExtension_Scent ext)
+            {
+                if (ext == null) return false;
+                if (ext.dysosmicTraits != null && ext.dysosmicTraits.Count > 0)
+                {
+                    foreach (Trait t in p.story?.traits?.allTraits ?? new List<Trait>())
+                    {
+                        if (ext.dysosmicTraits.Contains(t.def.defName))
+                            return true;
+                    }
+                }
+                if (ext.dysosmicTraitDegrees != null && ext.dysosmicTraitDegrees.Count > 0)
+                {
+                    foreach (TraitRequirement req in ext.dysosmicTraitDegrees)
+                    {
+                        Trait trait = req.GetTrait(p);
+                        if (trait != null)
+                            return true;
+                    }
+                }
+                if (ext.dysosmicGenes != null && ext.dysosmicGenes.Count > 0)
+                {
+                    if (p.genes != null)
+                    {
+                        foreach (Gene gene in p.genes.GenesListForReading)
+                        {
+                            if (ext.dysosmicGenes.Contains(gene.def.defName))
+                                return true;
+                        }
+                    }
+                }
+                return false;
+            }
             Room pawnRoom = pawn.GetRoom();
             bool pawnOutdoors = pawnRoom == null || pawnRoom.PsychologicallyOutdoors;
-            List<ThoughtDef> scentsToApply = new List<ThoughtDef>();
+            var scentsToApply = new List<ThoughtDef>();
+            var scentDysosmicStatus = new Dictionary<ThoughtDef, bool>();
             int radius = RimScentReworkedMod.Settings?.scentRadius?? 8;
+            bool homeOnly = RimScentReworkedMod.Settings?.homeOnly ?? false;
+            Area homeArea = homeOnly ? pawn.Map?.areaManager?.Home : null;
             foreach (IntVec3 cell in GenRadial.RadialCellsAround(pawn.Position, radius, true))
             {
                 if (!cell.InBounds(pawn.Map)) continue;
+                if (homeOnly && homeArea != null && !homeArea[cell]) continue;
                 if (!GenSight.LineOfSight(pawn.Position, cell, pawn.Map, true)) continue;
                 Room cellRoom = cell.GetRoom(pawn.Map);
                 bool cellOutdoors = cellRoom == null || cellRoom.PsychologicallyOutdoors;
@@ -82,6 +129,11 @@ namespace RimScentReworked
                                 ModExtension_Scent ext = hediff.def.GetModExtension<ModExtension_Scent>();
                                 if (ext?.thought == null) continue;
                                 scentsToApply.Add(ext.thought);
+                                bool is_Dysosmic = pawnHasDysosmicTrait || HasDysosmicGene(pawn) || IsScentDysosmicForPawn(pawn, ext);
+                                if (!scentDysosmicStatus.ContainsKey(ext.thought))
+                                    scentDysosmicStatus[ext.thought] = is_Dysosmic;
+                                else
+                                    scentDysosmicStatus[ext.thought] = scentDysosmicStatus[ext.thought] || is_Dysosmic;
                             }
                         }
                         continue;
@@ -93,6 +145,11 @@ namespace RimScentReworked
                     ModExtension_Scent thingExt = thing.def.GetModExtension<ModExtension_Scent>();
                     if (thingExt?.thought == null) continue;
                     scentsToApply.Add(thingExt.thought);
+                    bool isDysosmic = pawnHasDysosmicTrait || HasDysosmicGene(pawn) || IsScentDysosmicForPawn(pawn, thingExt);
+                    if (!scentDysosmicStatus.ContainsKey(thingExt.thought))
+                        scentDysosmicStatus[thingExt.thought] = isDysosmic;
+                    else
+                        scentDysosmicStatus[thingExt.thought] = scentDysosmicStatus[thingExt.thought] || isDysosmic;
                 }
             }
             foreach (GameCondition condition in pawn.Map.gameConditionManager.ActiveConditions)
@@ -126,7 +183,8 @@ namespace RimScentReworked
                 }
                 ClearThought(pawn);
                 activeThought = winner;
-                AddMemory(pawn, winner, winnerCount, smellFactor, dysomic);
+                bool winnerDysosmic = scentDysosmicStatus.TryGetValue(winner, out bool d) ? d : false;
+                AddMemory(pawn, winner, winnerCount, smellFactor, winnerDysosmic);
                 RemoveExcessMemory(pawn, winner, winnerCount);
             }
             else
@@ -138,7 +196,8 @@ namespace RimScentReworked
                     sourceCounts[def] = sourceCounts.TryGetValue(def, out int c) ? c + 1 : 1;
                 foreach (var pair in sourceCounts)
                 {
-                    AddMemory(pawn, pair.Key, pair.Value, smellFactor, dysomic);
+                    bool isDysosmic = scentDysosmicStatus.TryGetValue(pair.Key, out bool d) ? d : false;
+                    AddMemory(pawn, pair.Key, pair.Value, smellFactor, isDysosmic);
                     RemoveExcessMemory(pawn, pair.Key, pair.Value);
                 }
             }
@@ -151,10 +210,11 @@ namespace RimScentReworked
             activeThought = null;
         }
 
-        private void AddMemory(Pawn pawn, ThoughtDef def, int desired, float smellFactor, bool dysomic)
+        private void AddMemory(Pawn pawn, ThoughtDef def, int desired, float smellFactor, bool dysosmic)
         {
             int existing = CountThought(pawn, def);
-            int stackLimit = def.stackLimit > 0 ? def.stackLimit : 1;
+            bool allowStacking = RimScentReworkedMod.Settings?.allowMoodStacking ?? true;
+            int stackLimit = allowStacking ? (def.stackLimit > 0 ? def.stackLimit : 1) : 1;
             int target = Mathf.Min(desired, stackLimit);
             int toAdd = target - existing;
             if (toAdd <= 0) return;
@@ -163,7 +223,7 @@ namespace RimScentReworked
                 Thought_Memory mem = (Thought_Memory)ThoughtMaker.MakeThought(def);
                 float baseMood = def.stages[0].baseMoodEffect;
                 float offset = baseMood * (smellFactor - 1f);
-                if (dysomic)
+                if (dysosmic)
                     offset -= baseMood * 2f;
                 mem.moodOffset = Mathf.RoundToInt(offset);
                 pawn.needs.mood.thoughts.memories.TryGainMemory(mem);
@@ -172,7 +232,8 @@ namespace RimScentReworked
 
         private void RemoveExcessMemory(Pawn pawn, ThoughtDef def, int desired)
         {
-            int stackLimit = def.stackLimit > 0 ? def.stackLimit : 1;
+            bool allowStacking = RimScentReworkedMod.Settings?.allowMoodStacking ?? true;
+            int stackLimit = allowStacking ? (def.stackLimit > 0 ? def.stackLimit : 1) : 1;
             int target = Mathf.Min(desired, stackLimit);
             List<Thought_Memory> memories = pawn.needs.mood.thoughts.memories.Memories.Where(m => m.def == def).ToList();
             int excess = memories.Count - target;
@@ -208,7 +269,8 @@ namespace RimScentReworked
 
         private float ThoughtMagnitude(Pawn pawn, ThoughtDef def, int sourceCount)
         {
-            int stackLimit = def.stackLimit > 0 ? def.stackLimit : 1;
+            bool allowStacking = RimScentReworkedMod.Settings?.allowMoodStacking ?? true;
+            int stackLimit = allowStacking ? (def.stackLimit > 0 ? def.stackLimit : 1) : 1;
             int effective = Mathf.Min(sourceCount, stackLimit);
             return Mathf.Abs(def.stages[0].baseMoodEffect) * effective;
         }

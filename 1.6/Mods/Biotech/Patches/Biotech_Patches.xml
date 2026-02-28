@@ -33,7 +33,7 @@
     <Operation Class="PatchOperationAdd">
         <xpath>Defs/XenotypeDef[defName="Waster"]/genes</xpath>
         <value>
-            <li>RimScent_Gene_Dyosmic</li>
+            <li>RimScent_Gene_Dysosmic</li>
         </value>
     </Operation>
 

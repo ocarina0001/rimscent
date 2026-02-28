@@ -33,6 +33,13 @@
             <value>
                 <li Class="RimScentReworked.ModExtension_Scent">
                     <thought>RimScent_BloodScent</thought>
+                    <dysosmicGenes>
+                        <li>KillThirst</li>
+                        <li MayRequire="ludeon.rimworld.biotech">Bloodfeeder</li>
+                    </dysosmicGenes>
+                    <dysosmicTraits>
+                        <li>Bloodlust</li>
+                    </dysosmicTraits>
                 </li>
             </value>
         </match>
@@ -42,6 +49,13 @@
                 <modExtensions>
                     <li Class="RimScentReworked.ModExtension_Scent">
                         <thought>RimScent_BloodScent</thought>
+                        <dysosmicGenes>
+                            <li>KillThirst</li>
+                            <li MayRequire="ludeon.rimworld.biotech">Bloodfeeder</li>
+                        </dysosmicGenes>
+                        <dysosmicTraits>
+                            <li>Bloodlust</li>
+                        </dysosmicTraits>
                     </li>
                 </modExtensions>
             </value>

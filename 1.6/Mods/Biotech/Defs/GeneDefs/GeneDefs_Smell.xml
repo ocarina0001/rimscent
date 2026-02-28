@@ -32,10 +32,10 @@
     </GeneDef>
 
     <GeneDef>
-        <defName>RimScent_Gene_Dyosmic</defName>
-        <label>dyosmic</label>
+        <defName>RimScent_Gene_Dysosmic</defName>
+        <label>dysosmic</label>
         <description>Carriers of this gene have a unusual olfactory system, traditionally bad smells smell good to them and vice-versa.</description>
-        <iconPath>UI/Icons/Genes/Gene_Dyosmic</iconPath>
+        <iconPath>UI/Icons/Genes/Gene_Dysosmic</iconPath>
         <displayCategory>Miscellaneous</displayCategory>
         <displayOrderInCategory>922</displayOrderInCategory>
         <forcedTraits>
