@@ -52,7 +52,7 @@
   <RimScent_FuelScent.stages.fuel_fumes.description>Des vapeurs âcres de carburant chimique et d'huile. Elles me donnent un léger mal de tête.</RimScent_FuelScent.stages.fuel_fumes.description>
   
   <!-- EN: generator fumes -->
-  <RimScent_GeneratorScent.stages.generator_fumes.label>émanations du générateur</RimScent_GeneratorScent.stages.generator_fumes.label>
+  <RimScent_GeneratorScent.stages.generator_fumes.label>émanations de générateur</RimScent_GeneratorScent.stages.generator_fumes.label>
   <!-- EN: The scent of a running generator. I shouldn't be around it longer than necessary without a mask. -->
   <RimScent_GeneratorScent.stages.generator_fumes.description>L'odeur d'un générateur en marche. Je ne devrais pas rester à proximité plus longtemps que nécessaire sans masque.</RimScent_GeneratorScent.stages.generator_fumes.description>
   
