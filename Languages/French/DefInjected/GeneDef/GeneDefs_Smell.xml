@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<LanguageData>
+  
+  <!-- EN: anosmic -->
+  <RimScent_Gene_Anosmic.label>anosmique</RimScent_Gene_Anosmic.label>
+  <!-- EN: Carriers of this gene are unable to smell, while this means they won't be able to enjoy the good smells of life, they also won't be able to hate the bad smells either. -->
+  <RimScent_Gene_Anosmic.description>Les porteurs de ce gène sont incapables de sentir les odeurs. Cela signifie qu'ils ne peuvent pas profiter des bonnes odeurs de la vie, mais ils ne peuvent pas non plus détester les mauvaises odeurs.</RimScent_Gene_Anosmic.description>
+  
+  <!-- EN: dysosmic -->
+  <RimScent_Gene_Dysosmic.label>dysosmique</RimScent_Gene_Dysosmic.label>
+  <!-- EN: Carriers of this gene have a unusual olfactory system, traditionally bad smells smell good to them and vice-versa. -->
+  <RimScent_Gene_Dysosmic.description>Les porteurs de ce gène ont un système olfactif inhabituel : les odeurs traditionnellement désagréables leur semblent agréables, et inversement.</RimScent_Gene_Dysosmic.description>
+  
+  <!-- EN: keen nose -->
+  <RimScent_Gene_KeenNose.label>Hyperosmique</RimScent_Gene_KeenNose.label>
+  <!-- EN: Carriers of this gene are able to smell particularly well, good smells and bad smells are strengthened for the carrier. -->
+  <RimScent_Gene_KeenNose.description>Les porteurs de ce gène ont un odorat particulièrement développé, les bonnes et les mauvaises odeurs sont amplifiées pour eux.</RimScent_Gene_KeenNose.description>
+  
+</LanguageData>
