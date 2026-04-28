@@ -162,7 +162,7 @@
     <ThoughtDef>
         <defName>RimScent_BileScent</defName>
         <durationDays>0.1</durationDays>
-        <stackLimit>4</stackLimit>
+        <stackLimit>2</stackLimit>
         <stages>
             <li>
                 <label>foul bile</label>

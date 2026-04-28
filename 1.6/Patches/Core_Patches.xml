@@ -119,7 +119,7 @@
     </Operation>
 
     <Operation Class="PatchOperationAdd">
-        <xpath>Defs/HediffDef[defName="FibrousMechanites"]/stages/li[label="mild pain" or label="intense pain"]/capMods</xpath>
+        <xpath>Defs/HediffDef[defName="FibrousMechanites" or defName="SensoryMechanites"]/stages/li[label="mild pain" or label="intense pain"]/capMods</xpath>
         <value>
             <li>
                 <capacity>RimScent_Smell</capacity>

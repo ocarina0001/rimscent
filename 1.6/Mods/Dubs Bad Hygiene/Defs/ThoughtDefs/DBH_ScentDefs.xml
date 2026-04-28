@@ -9,7 +9,7 @@
             <li>
                 <label>smelly individual</label>
                 <description>Someone around me smells really bad, they should clean themselves up.</description>
-                <baseMoodEffect>-3</baseMoodEffect>
+                <baseMoodEffect>-2</baseMoodEffect>
             </li>
         </stages>
     </ThoughtDef>
@@ -17,12 +17,12 @@
     <ThoughtDef>
         <defName>RimScent_Feces</defName>
         <durationDays>0.1</durationDays>
-        <stackLimit>4</stackLimit>
+        <stackLimit>2</stackLimit>
         <stages>
             <li>
                 <label>stench of feces</label>
                 <description>It smells like absolutely disgusting shit here.</description>
-                <baseMoodEffect>-8</baseMoodEffect>
+                <baseMoodEffect>-6</baseMoodEffect>
             </li>
         </stages>
     </ThoughtDef>
@@ -30,12 +30,12 @@
     <ThoughtDef>
         <defName>RimScent_Urine</defName>
         <durationDays>0.1</durationDays>
-        <stackLimit>4</stackLimit>
+        <stackLimit>2</stackLimit>
         <stages>
             <li>
                 <label>stench of urine</label>
                 <description>The unmistakable reeking stench of urine, sour and foul.</description>
-                <baseMoodEffect>-6</baseMoodEffect>
+                <baseMoodEffect>-4</baseMoodEffect>
             </li>
         </stages>
     </ThoughtDef>
