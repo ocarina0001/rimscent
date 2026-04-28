@@ -21,5 +21,8 @@
         <li IfModActive="oskarpotocki.vfe.medieval2">1.6/Mods/Vanilla Factions Expanded - Medieval 2</li>
         <li IfModActive="ceteam.combatextended">1.6/Mods/Combat Extended</li>
         <li IfModActive="sumika.overflowingflowers">1.6/Mods/Overflowing Flowers</li>
+        <li IfModActive="rah.rbse">1.6/Mods/RBSE</li>
+        <li IfModActive="vat.epoeforked">1.6/Mods/EPOE</li>
+        <li IfModActive="vanillaexpanded.gravship">1.6/Mods/Vanilla Gravship Expanded</li>
     </v1.6>
 </loadFolders>

@@ -238,4 +238,17 @@
         </stages>
     </ThoughtDef>
 
+    <ThoughtDef>
+        <defName>RimScent_FreshOxygen</defName>
+        <durationDays>0.1</durationDays>
+        <stackLimit>4</stackLimit>
+        <stages>
+            <li>
+                <label>fresh air</label>
+                <description>Pure and breathable oxygen.</description>
+                <baseMoodEffect>1</baseMoodEffect>
+            </li>
+        </stages>
+    </ThoughtDef>
+
 </Defs>
