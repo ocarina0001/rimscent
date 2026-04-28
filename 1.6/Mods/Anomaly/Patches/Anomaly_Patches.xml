@@ -8,6 +8,15 @@
             <value>
                 <li Class="RimScentReworked.ModExtension_Scent">
                     <thought>RimScent_TwistedFleshScent</thought>
+                    <dysosmicTraits>
+                        <li>Psychopath</li>
+                        <li MayRequire="ludeon.rimworld.anomaly">Occultist</li>
+                        <li MayRequire="ludeon.rimworld.anomaly">Disturbing</li>
+                        <li MayRequire="ludeon.rimworld.anomaly">VoidFascination</li>
+                    </dysosmicTraits>
+                    <anosmicTraits>
+                        <li MayRequire="vanillaexpanded.vanillatraitsexpanded">VTE_Desensitized</li>
+                    </anosmicTraits>
                 </li>
             </value>
         </match>
@@ -17,6 +26,15 @@
                 <modExtensions>
                     <li Class="RimScentReworked.ModExtension_Scent">
                         <thought>RimScent_TwistedFleshScent</thought>
+                        <dysosmicTraits>
+                            <li>Psychopath</li>
+                            <li MayRequire="ludeon.rimworld.anomaly">Occultist</li>
+                            <li MayRequire="ludeon.rimworld.anomaly">Disturbing</li>
+                            <li MayRequire="ludeon.rimworld.anomaly">VoidFascination</li>
+                        </dysosmicTraits>
+                        <anosmicTraits>
+                            <li MayRequire="vanillaexpanded.vanillatraitsexpanded">VTE_Desensitized</li>
+                        </anosmicTraits>
                     </li>
                 </modExtensions>
             </value>
@@ -31,6 +49,15 @@
             <value>
                 <li Class="RimScentReworked.ModExtension_Scent">
                     <thought>RimScent_GrayFleshScent</thought>
+                    <dysosmicTraits>
+                        <li>Psychopath</li>
+                        <li MayRequire="ludeon.rimworld.anomaly">Occultist</li>
+                        <li MayRequire="ludeon.rimworld.anomaly">Disturbing</li>
+                        <li MayRequire="ludeon.rimworld.anomaly">VoidFascination</li>
+                    </dysosmicTraits>
+                    <anosmicTraits>
+                        <li MayRequire="vanillaexpanded.vanillatraitsexpanded">VTE_Desensitized</li>
+                    </anosmicTraits>
                 </li>
             </value>
         </match>
@@ -40,6 +67,15 @@
                 <modExtensions>
                     <li Class="RimScentReworked.ModExtension_Scent">
                         <thought>RimScent_GrayFleshScent</thought>
+                        <dysosmicTraits>
+                            <li>Psychopath</li>
+                            <li MayRequire="ludeon.rimworld.anomaly">Occultist</li>
+                            <li MayRequire="ludeon.rimworld.anomaly">Disturbing</li>
+                            <li MayRequire="ludeon.rimworld.anomaly">VoidFascination</li>
+                        </dysosmicTraits>
+                        <anosmicTraits>
+                            <li MayRequire="vanillaexpanded.vanillatraitsexpanded">VTE_Desensitized</li>
+                        </anosmicTraits>
                     </li>
                 </modExtensions>
             </value>

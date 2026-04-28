@@ -30,6 +30,9 @@
             <value>
                 <li Class="RimScentReworked.ModExtension_Scent">
                     <thought>RimScent_FireScent</thought>
+                    <dysosmicTraits>
+                        <li>Pyromaniac</li>
+                    </dysosmicTraits>
                 </li>
             </value>
         </match>
@@ -39,6 +42,9 @@
                 <modExtensions>
                     <li Class="RimScentReworked.ModExtension_Scent">
                         <thought>RimScent_FireScent</thought>
+                        <dysosmicTraits>
+                            <li>Pyromaniac</li>
+                        </dysosmicTraits>
                     </li>
                 </modExtensions>
             </value>
@@ -52,6 +58,9 @@
             <value>
                 <li Class="RimScentReworked.ModExtension_Scent">
                     <thought>RimScent_GeneratorScent</thought>
+                    <dysosmicTraits>
+                        <li>Pyromaniac</li>
+                    </dysosmicTraits>
                 </li>
             </value>
         </match>
@@ -61,6 +70,9 @@
                 <modExtensions>
                     <li Class="RimScentReworked.ModExtension_Scent">
                         <thought>RimScent_GeneratorScent</thought>
+                        <dysosmicTraits>
+                            <li>Pyromaniac</li>
+                        </dysosmicTraits>
                     </li>
                 </modExtensions>
             </value>

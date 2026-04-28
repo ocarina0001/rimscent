@@ -10,5 +10,8 @@ namespace RimScentReworked
         public List<string> dysosmicGenes;
         public List<string> dysosmicTraits;
         public List<TraitRequirement> dysosmicTraitDegrees;
+        public List<string> anosmicGenes;
+        public List<string> anosmicTraits;
+        public List<TraitRequirement> anosmicTraitDegrees;
     }
 }

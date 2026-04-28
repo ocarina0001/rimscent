@@ -52,6 +52,9 @@
             <value>
                 <li Class="RimScentReworked.ModExtension_Scent">
                     <thought>RimScent_FuelScent</thought>
+                    <dysosmicTraits>
+                        <li>Pyromaniac</li>
+                    </dysosmicTraits>
                 </li>
             </value>
         </match>
@@ -61,6 +64,9 @@
                 <modExtensions>
                     <li Class="RimScentReworked.ModExtension_Scent">
                         <thought>RimScent_FuelScent</thought>
+                        <dysosmicTraits>
+                            <li>Pyromaniac</li>
+                        </dysosmicTraits>
                     </li>
                 </modExtensions>
             </value>
